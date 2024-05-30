@@ -1,0 +1,17 @@
+{
+  "name": "test_package",
+  "version": "1.0.0",
+  "description": "A test package",
+  "main": "index.js",
+  "scripts": {
+    "build:server": "vite build --config vite.config.server.js",
+    "build:client": "vite build --config vite.config.client.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vue": "^3.4.27"
+  },
+  "devDependencies": {
+    "vite": "^5.2.12"
+  }
+}

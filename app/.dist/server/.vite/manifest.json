@@ -1,0 +1,8 @@
+{
+  "app/routes/login/login.server.ts": {
+    "file": "login.js",
+    "name": "login",
+    "src": "app/routes/login/login.server.ts",
+    "isEntry": true
+  }
+}
