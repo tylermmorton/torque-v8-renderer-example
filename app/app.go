@@ -2,11 +2,11 @@ package app
 
 import (
 	_ "embed"
-	"github.com/tylermmorton/torque-v8-renderer-example/app/routes/login"
 	"io/fs"
 	"net/http"
 
 	"github.com/tylermmorton/torque"
+	"github.com/tylermmorton/torque-v8-renderer-example/app/routes/login"
 )
 
 //go:embed app.tmpl.html
