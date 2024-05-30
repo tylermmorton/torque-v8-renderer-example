@@ -4,7 +4,10 @@ go 1.22.1
 
 replace github.com/tylermmorton/torque => ../torque
 
-require github.com/tylermmorton/torque v1.1.0
+require (
+	github.com/tylermmorton/torque v1.1.0
+	rogchap.com/v8go v0.9.0
+)
 
 require (
 	github.com/go-chi/chi/v5 v5.0.11 // indirect

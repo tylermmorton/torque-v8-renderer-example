@@ -1,14 +1,15 @@
 package main
 
 import (
-	"github.com/tylermmorton/torque"
-	"github.com/tylermmorton/torque-v8-renderer-example/app/routes"
 	"log"
 	"net/http"
+
+	"github.com/tylermmorton/torque"
+	"github.com/tylermmorton/torque-v8-renderer-example/app"
 )
 
 func main() {
-	h, err := torque.New[routes.ViewModel](&routes.Controller{Dist: nil})
+	h, err := torque.New[app.ViewModel](&app.Controller{Dist: nil})
 	if err != nil {
 		log.Fatalf("failed to create torque app: %v", err)
 	}
