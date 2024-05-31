@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	h, err := torque.New[app.ViewModel](&app.Controller{Dist: nil})
+	h, err := torque.New[app.ViewModel](&app.Controller{})
 	if err != nil {
 		log.Fatalf("failed to create torque app: %v", err)
 	}

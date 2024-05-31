@@ -1,13 +1,16 @@
 package app
 
 import (
+	"embed"
 	_ "embed"
-	"io/fs"
 	"net/http"
 
 	"github.com/tylermmorton/torque"
 	"github.com/tylermmorton/torque-v8-renderer-example/app/routes/login"
 )
+
+//go:embed .dist
+var dist embed.FS
 
 //go:embed app.tmpl.html
 var templateText string
@@ -20,9 +23,7 @@ func (ViewModel) TemplateText() string {
 	return templateText
 }
 
-type Controller struct {
-	Dist fs.FS
-}
+type Controller struct{}
 
 var _ interface {
 	torque.Loader[ViewModel]
@@ -30,8 +31,8 @@ var _ interface {
 } = &Controller{}
 
 func (m *Controller) Router(r torque.Router) {
-	r.Handle("/s", http.FileServer(http.FS(m.Dist)))
-	r.Handle("/login", torque.MustNew[login.ViewModel](&login.Controller{Dist: m.Dist}))
+	r.Handle("/s", http.FileServer(http.FS(dist)))
+	r.Handle("/login", torque.MustNew[login.ViewModel](&login.Controller{Dist: dist}))
 }
 
 func (m *Controller) Load(req *http.Request) (ViewModel, error) {

@@ -8,7 +8,7 @@ export default defineConfig({
         }),
     ],
     build: {
-        manifest: true,
+        manifest: 'manifest.json',
         outDir: './app/.dist/server',
         emptyOutDir: true,
         rollupOptions: {

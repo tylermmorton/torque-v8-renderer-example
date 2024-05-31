@@ -2,6 +2,7 @@ package login
 
 import (
 	"io/fs"
+	"log"
 	"net/http"
 
 	"github.com/tylermmorton/torque"
@@ -17,15 +18,37 @@ var _ interface {
 	torque.Loader[ViewModel]
 } = &Controller{}
 
-func (m *Controller) Plugins() ([]torque.Plugin, error) {
-	clientBuild, err := fs.Sub(m.Dist, "client")
-	if err != nil {
-		return nil, err
+func logFileSystem(fsys fs.FS) {
+	var walkFn func(path string, d fs.DirEntry, err error) error
+
+	walkFn = func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		} else if d.IsDir() {
+			log.Printf("Dir: %s", path)
+		} else {
+			log.Printf("File: %s", path)
+		}
+		return nil
 	}
 
-	serverBuild, err := fs.Sub(m.Dist, "server")
+	err := fs.WalkDir(fsys, ".", walkFn)
 	if err != nil {
-		return nil, err
+		panic(err)
+	}
+}
+
+func (m *Controller) Plugins() []torque.Plugin {
+	logFileSystem(m.Dist)
+
+	clientBuild, err := fs.Sub(m.Dist, ".dist/client")
+	if err != nil {
+		panic(err)
+	}
+
+	serverBuild, err := fs.Sub(m.Dist, ".dist/server")
+	if err != nil {
+		panic(err)
 	}
 
 	return []torque.Plugin{
@@ -33,7 +56,7 @@ func (m *Controller) Plugins() ([]torque.Plugin, error) {
 			ClientBuild: clientBuild,
 			ServerBuild: serverBuild,
 		},
-	}, nil
+	}
 }
 
 func (m *Controller) Load(req *http.Request) (ViewModel, error) {
