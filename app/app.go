@@ -31,7 +31,7 @@ var _ interface {
 } = &Controller{}
 
 func (m *Controller) Router(r torque.Router) {
-	r.Handle("/s", http.FileServer(http.FS(dist)))
+	r.HandleFileSystem("/s", dist)
 	r.Handle("/login", torque.MustNew[login.ViewModel](&login.Controller{Dist: dist}))
 }
 
