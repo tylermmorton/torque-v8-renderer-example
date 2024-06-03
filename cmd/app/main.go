@@ -15,7 +15,7 @@ func main() {
 	}
 
 	log.Printf("Starting torque app at http://localhost:8080")
-	err = http.ListenAndServe(":8080", h)
+	err = http.ListenAndServe("localhost:8080", h)
 	if err != nil {
 		log.Fatalf("failed to start http listener: %v", err)
 	}

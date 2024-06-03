@@ -3,6 +3,9 @@
 <html>
   <head>
       <title>{{ .Title }}</title>
+      {{ range .Scripts }}
+      <script type="module" src="{{ . }}"></script>
+      {{ end }}
   </head>
   <body>
       {{ outlet }}

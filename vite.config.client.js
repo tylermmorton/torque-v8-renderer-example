@@ -9,13 +9,14 @@ export default defineConfig({
         outDir: './app/.dist/client',
         emptyOutDir: true,
         rollupOptions:{
+            preserveEntrySignatures: 'strict',
             input: {
                 "login": './app/routes/login/login.client.ts',
             },
             output: {
-                format: 'es',
+                format: 'esm',
+                exports: 'named',
                 entryFileNames: '[name].js',
-                inlineDynamicImports: true,
             },
         },
     },

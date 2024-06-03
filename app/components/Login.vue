@@ -1,16 +1,23 @@
 <template>
   <div>
-    <h1>{{ props.message }}</h1>
-    <input type="text" placeholder="Enter your email" />
-    <input type="password" placeholder="Enter your password" />
-    <button>Login</button>
+    <p>
+      {{props.message}}
+      <br>
+      {{props.count}}
+      <button @click="count++">+</button>
+    </p>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue'
+import {onMounted} from 'vue'
 
 const props = defineProps<{
-  message: string
+  message: string;
+  count: number;
 }>()
+
+onMounted(()=>{
+  console.log('mounted')
+})
 </script>
